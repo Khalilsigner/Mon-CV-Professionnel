@@ -449,7 +449,6 @@ main section#accueil.visible {
     }
 }
 
-
 /* --- Définition de l'animation de clignotement --- */
 @keyframes slow-blink {
     0% { opacity: 1; }
