@@ -29,25 +29,31 @@ interactiveElements.forEach(el => {
     });
 });
 
-// --- Logique pour l'animation d'apparition au défilement ---
+// --- Logique pour l'animation d'apparition au défilement (restaurée) ---
+const observer = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    },
+    {
+        threshold: 0.1, // L'animation se déclenche quand 10% de la section est visible
+    }
+);
 
-// On crée un "observateur"
-const observer = new IntersectionObserver((entries) => {
-    // On boucle sur chaque section que l'observateur voit
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            // Si la section est visible à l'écran, on lui ajoute la classe 'visible'
-            entry.target.classList.add('visible');
-        }
-    });
-}, {
-    threshold: 0.1 // L'animation se déclenche quand 10% de la section est visible
+const allSections = document.querySelectorAll('main section');
+allSections.forEach((section) => {
+    observer.observe(section);
 });
 
-// On sélectionne toutes les sections dans le <main>
-const sectionsToAnimate = document.querySelectorAll('main section');
+// --- Logique améliorée pour le menu mobile ---
+const navLinks = document.querySelectorAll('#nav-menu a');
 
-// On dit à l'observateur de surveiller chacune de ces sections
-sectionsToAnimate.forEach((section) => {
-    observer.observe(section);
+// Ferme le menu quand on clique sur un lien (sur mobile)
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+    });
 });

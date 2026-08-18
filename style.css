@@ -369,26 +369,25 @@ main article:hover {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* L'ombre devient plus prononcée */
 }
 
-/* --- Animation d'apparition au défilement --- */
+/* --- Animation d'apparition au défilement (restaurée) --- */
 main section {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    opacity: 0; /* Caché par défaut */
+    transform: translateY(30px); /* Légèrement décalé vers le bas */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 main section.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Devient visible */
+    transform: translateY(0); /* Revient à sa position initiale */
 }
 
-/* La première section (accueil) est toujours visible par défaut */
-main section#accueil {
+/* La première section est toujours visible au chargement */
+main section#accueil.visible {
     opacity: 1;
     transform: translateY(0);
 }
 
 /* --- Responsive Design (pour les écrans plus petits) --- */
-
 @media (max-width: 768px) {
     /* Ces styles s'appliquent UNIQUEMENT sur les écrans de 768px ou moins (tablettes et mobiles) */
 
@@ -396,8 +395,10 @@ main section#accueil {
     header {
         padding: 1.5rem 1rem;
     }
+
     main {
-        margin: 1rem;
+        /* On ajuste la marge pour qu'elle soit correcte avec le header sticky */
+        margin: 7rem 1rem 1rem 1rem;
         padding: 1.5rem 1rem;
     }
 
@@ -407,12 +408,13 @@ main section#accueil {
     }
     #accueil .accueil-texte { text-align: center; } /* Center text when stacked */
 
+
     /* 3. On affiche le bouton hamburger */
     .hamburger-icon {
         display: block;
         position: absolute; /* Pour le placer librement dans le header */
         top: 2.5rem;
-        right: 1.5rem;
+        right: 1rem;
         font-size: 1.5rem;
         color: white;
         background: transparent;
@@ -425,19 +427,28 @@ main section#accueil {
     #nav-menu {
         position: fixed; /* Le menu se superpose au contenu */
         top: 0;
-        right: -100%; /* On le sort de l'écran par la droite */
+        left: -100%; /* On le sort de l'écran par la GAUCHE pour une animation plus naturelle */
         width: 70%;
         height: 100%;
         background: rgba(0, 40, 80, 0.9);
         backdrop-filter: blur(10px);
-        transition: right 0.3s ease-in-out; /* Animation de glissement */
+        transition: left 0.3s ease-in-out; /* Animation de glissement */
+        flex-direction: column; /* Le menu devient vertical */
+        padding-top: 5rem; /* Espace pour ne pas être sous le header */
+    }
+
+    #nav-menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
     }
 
     /* 5. Quand le menu est actif, on le fait apparaître */
     #nav-menu.active {
-        right: 0; /* On le ramène à l'écran */
+        left: 0; /* On le ramène à l'écran */
     }
 }
+
 
 /* --- Définition de l'animation de clignotement --- */
 @keyframes slow-blink {
@@ -451,4 +462,94 @@ main section#accueil {
     0% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 86, 179, 0.2); }
     50% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 40px rgba(0, 86, 179, 0.6); }
     100% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 86, 179, 0.2); }
+}
+
+/* --- Style du curseur personnalisé --- */
+.cursor-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #0056b3;
+    border-radius: 50%;
+    position: fixed; /* Pour qu'il suive la souris partout */
+    transform: translate(-50%, -50%); /* Pour centrer le point sur le curseur */
+    pointer-events: none; /* Pour que le curseur ne bloque pas les clics */
+    z-index: 9999; /* Pour qu'il soit toujours au-dessus de tout */
+    transition: transform 0.2s ease-out; /* Animation fluide */
+}
+
+/* Quand le curseur survole un lien ou un bouton, il s'agrandit */
+.cursor-dot.hovered {
+    transform: translate(-50%, -50%) scale(5);
+    background-color: rgba(0, 86, 179, 0.3);
+}
+
+@media (max-width: 768px) {
+    /* Sur mobile, on cache notre curseur personnalisé et on réaffiche le curseur par défaut */
+    .cursor-dot { display: none; }
+    * { cursor: auto; }
+
+    /* Ces styles s'appliquent UNIQUEMENT sur les écrans de 768px ou moins (tablettes et mobiles) */
+
+    /* 1. On adapte l'en-tête et le contenu principal pour les petits écrans */
+    header {
+        padding: 1.5rem 1rem;
+    }
+
+    main {
+        /* On ajuste la marge pour qu'elle soit correcte avec le header sticky */
+        margin: 7rem 1rem 1rem 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    /* 2. Page d'accueil : on empile le texte et la photo */
+    #accueil .accueil-content-flex {
+        flex-direction: column; /* Les éléments s'empilent verticalement */
+    }
+    #accueil .accueil-texte { text-align: center; } /* Center text when stacked */
+
+
+    /* 3. On affiche le bouton hamburger */
+    .hamburger-icon {
+        display: block;
+        position: absolute; /* Pour le placer librement dans le header */
+        top: 2.5rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        color: #003d82;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1001; /* Pour qu'il soit toujours au-dessus des autres éléments */
+    }
+
+    /* 4. On cache le menu de navigation par défaut sur mobile */
+    #nav-menu {
+        position: fixed; /* Le menu se superpose au contenu */
+        top: 0;
+        left: -100%; /* On le sort de l'écran par la GAUCHE pour une animation plus naturelle */
+        width: 70%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        transition: left 0.3s ease-in-out; /* Animation de glissement */
+        padding-top: 5rem; /* Espace pour ne pas être sous le header */
+        z-index: 1000;
+    }
+
+    #nav-menu ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    nav {
+        border: none;
+        padding: 0;
+        border-radius: 0;
+    }
+
+    /* 5. Quand le menu est actif, on le fait apparaître */
+    #nav-menu.active {
+        left: 0; /* On le ramène à l'écran */
+    }
 }
