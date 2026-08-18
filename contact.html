@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- On lie notre feuille de style CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>Contact - Ibrahima Khalil KONTA</title>
+</head>
+<body>
+    <!-- L'en-tête est identique sur toutes les pages pour la cohérence -->
+    <header>
+        <h1>Ibrahima Khalil KONTA</h1>
+        <h2>Leader en Management des Organisations</h2>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="profil.html">Profil</a></li>
+                <li><a href="competences.html">Compétences</a></li>
+                <li><a href="formation.html">Formation</a></li>
+                <li><a href="experiences.html">Expériences</a></li>
+                <li><a href="projets.html">Projets</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Contenu principal spécifique à la page Contact -->
+    <main>
+        <section id="contact-detail">
+            <h1>Me Contacter</h1>
+            <p>N'hésitez pas à me joindre directement via les informations ci-dessous ou en utilisant le formulaire de contact.</p>
+
+            <h2>Informations Directes</h2>
+            <ul>
+                <li><i class="fas fa-phone"></i> <a href="tel:+221765355808">+221 76 535 58 08</a></li>
+                <li><i class="fas fa-envelope"></i> <a href="mailto:ibrahimakonta571@gmail.com">ibrahimakonta571@gmail.com</a></li>
+                <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/ibrahimakonta" target="_blank">linkedin.com/in/ibrahimakonta</a></li>
+            </ul>
+
+            <h2>Formulaire de Contact</h2>
+            <form action="#" method="post">
+                <div>
+                    <label for="nom">Votre Nom :</label>
+                    <input type="text" id="nom" name="nom_utilisateur" required>
+                </div>
+                <div>
+                    <label for="email">Votre Email :</label>
+                    <input type="email" id="email" name="email_utilisateur" required>
+                </div>
+                <div>
+                    <label for="sujet">Sujet :</label>
+                    <input type="text" id="sujet" name="sujet_message">
+                </div>
+                <div>
+                    <label for="message">Votre Message :</label>
+                    <textarea id="message" name="message_utilisateur" rows="5" required></textarea>
+                </div>
+                <div>
+                    <button type="submit">Envoyer le Message</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,454 @@
+/* style.css */
+
+/* --- 1. Importation d'une police moderne depuis Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+html {
+    scroll-behavior: smooth; /* Permet un défilement fluide (utile pour les sites one-page) */
+}
+
+/* Style général appliqué à toute la page */
+body {
+    font-family: 'Poppins', sans-serif; /* On applique notre nouvelle police */
+    line-height: 1.6; /* Augmente l'espace entre les lignes de texte */
+    margin: 0; /* Bonne pratique : enlever les marges par défaut du navigateur */
+    padding: 0; /* Bonne pratique : enlever les paddings par défaut */
+    
+    background-image: url('images/site-bg.jpeg'); /* On applique l'image de fond */
+    background-size: cover; /* L'image couvre tout l'écran */
+    background-position: center; /* L'image est centrée */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter */
+    background-attachment: fixed; /* L'image reste fixe lors du défilement */
+
+    color: #333333; /* Une couleur de texte gris foncé, moins agressive que le noir pur */
+}
+
+/* --- En-tête --- */
+header {
+    /* Nouvelle mise en page Flexbox */
+    display: flex;
+    justify-content: space-between; /* Pousse les éléments aux extrémités */
+    align-items: center; /* Centre verticalement */
+    padding: 1rem 2rem; /* Espace intérieur (haut/bas et côtés) */
+
+    /* On garde l'effet verre dépoli pour le header sticky */
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    /* On rend l'en-tête "collant" */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Assure que l'en-tête reste au-dessus de tout le reste */
+}
+
+/* Styles pour le bloc de marque (nom et titre) dans l'en-tête */
+.header-brand {
+    /* Ensure no extra space around the brand */
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles spécifiques pour le h1 dans le header-brand */
+.header-brand h1 {
+    color: #003d82; /* On met le nom en bleu foncé */
+    font-size: 1.8rem; /* Taille plus grande pour le nom */
+    margin: 0; /* Supprime les marges par défaut */
+    line-height: 1.2; /* Ajuste l'interligne */
+    animation: none; /* Supprime l'animation de clignotement si elle était appliquée ici */
+}
+
+/* Styles spécifiques pour le h2 dans le header-brand */
+.header-brand h2 {
+    color: #0056b3; /* On met le sous-titre en bleu */
+    font-size: 1.1rem; /* Taille ajustée pour le sous-titre */
+    margin: 0; /* Supprime les marges par défaut */
+    line-height: 1.2; /* Ajuste l'interligne */
+}
+
+/* On cache le bouton hamburger par défaut (sur grand écran) */
+.hamburger-icon {
+    display: none;
+}
+
+
+/* --- Navigation --- */
+nav {
+    border: 1px solid #0056b3; /* Bordure bleue autour du menu */
+    border-radius: 50px; /* Coins très arrondis pour un look moderne */
+    padding: 0.25rem; /* Petit espace intérieur */
+}
+
+nav ul {
+    list-style-type: none; /* Enlève les puces (les points noirs) */
+    padding: 0; /* Enlève l'espacement par défaut des listes */
+    margin: 0; /* On enlève la marge */
+    display: flex; /* La magie de Flexbox : aligne les éléments sur une ligne */
+    justify-content: center; /* Centre la barre de menu horizontalement */
+    gap: 0.5rem; /* Crée un petit espace entre chaque bouton du menu */
+}
+
+nav a {
+    color: #0056b3; /* Texte des liens en bleu */
+    padding: 0.5rem 1rem; /* Crée de l'espace pour faire des "boutons" cliquables */
+    border-radius: 5px; /* Arrondit les coins des boutons */
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Animation douce au survol */
+}
+
+/* Au survol d'un lien dans la navigation, on change subtilement le fond */
+nav a:hover {
+    background-color: rgba(0, 86, 179, 0.1); /* Fond bleu très transparent */
+    text-decoration: none; /* On s'assure que le lien ne se souligne pas */
+    transform: scale(1.1); /* EFFET POP-UP : on agrandit le bouton de 10% */
+}
+
+/* On crée un "conteneur" pour notre contenu principal */
+main {
+    max-width: 900px; /* Le contenu ne dépassera jamais 900 pixels de large */
+    /* Ajuste margin-top pour pousser le contenu sous l'en-tête fixe. */
+    /* La hauteur de l'en-tête est d'environ 1rem (padding) + 1.8rem (h1) + 1.1rem (h2) + 1rem (padding) = ~5.9rem. */
+    /* On utilise 7rem pour être sûr d'avoir assez d'espace. */
+    margin: 7rem auto 2rem auto;
+    padding: 2.5rem; /* Ajoute de l'espace à l'intérieur du conteneur */
+
+    /* --- EFFET "VERRE DÉPOLI" (GLASSMORPHISM) --- */
+    background: rgba(255, 255, 255, 0.6); /* Fond blanc très semi-transparent */
+    backdrop-filter: blur(12px); /* C'est la propriété qui floute l'arrière-plan ! */
+    -webkit-backdrop-filter: blur(12px); /* Pour la compatibilité avec Safari */
+    border-radius: 15px; /* Des coins plus arrondis pour un look plus doux */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Bordure subtile pour délimiter le verre */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15); /* Ombre de base */
+    animation: glowing-border 4s infinite ease-in-out; /* Ajout de l'animation d'aura lumineuse */
+}
+
+/* On ajoute de l'espace entre chaque section de la page */
+main section:not(:first-child) {
+    padding-top: 3rem;
+    border-top: 1px solid #ddd;
+}
+
+/* --- Section Compétences --- */
+.competences-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille responsive ! */
+    gap: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+/* --- Section Centres d'Intérêt --- */
+.interets-grille {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Grille responsive ! */
+    gap: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.interet-bloc {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.interet-bloc:hover i {
+    /* EFFET DE LUEUR SUR LES ICÔNES */
+    filter: drop-shadow(0 0 10px rgba(0, 86, 179, 0.8));
+    transform: scale(1.1);
+}
+
+.interet-bloc:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.interet-bloc i {
+    font-size: 2.5rem; /* Icônes plus grandes */
+    color: #0056b3; /* Icônes en bleu */
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.interet-bloc h4 {
+    margin-bottom: 0.5rem;
+    color: #003d82; /* Titre un peu plus foncé */
+}
+
+.competence-bloc {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.competence-bloc:hover i {
+    /* EFFET DE LUEUR SUR LES ICÔNES */
+    filter: drop-shadow(0 0 10px rgba(0, 86, 179, 0.8));
+    transform: scale(1.1);
+}
+
+.competence-bloc:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.competence-bloc i {
+    font-size: 2.5rem; /* Icônes plus grandes */
+    color: #0056b3; /* Icônes en bleu */
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.competence-bloc h4 {
+    margin-bottom: 0.5rem;
+    color: #003d82; /* Titre un peu plus foncé */
+}
+
+.competence-bloc p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* --- Titres & Liens --- */
+
+/* On met les titres du contenu principal en bleu */
+main h1, main h2, main h3, main h4 {
+    color: #004a99; /* Un bleu légèrement plus sombre pour un meilleur contraste */
+}
+
+/* On stylise les liens pour qu'ils soient bleus et sans soulignement par défaut */
+a {
+    color: #0056b3;
+    text-decoration: none; /* Enlève le soulignement */
+    cursor: pointer; /* Le curseur devient une main sur TOUS les liens */
+}
+
+/* Au survol de la souris, le lien se souligne pour montrer qu'il est cliquable */
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ajoute un petit espace à droite de toutes les icônes */
+i.fas, i.fab {
+    margin-right: 8px;
+}
+
+/* --- Styles spécifiques à la page d'accueil --- */
+
+/* On transforme la section "accueil" en conteneur Flexbox */
+#accueil .accueil-content-flex { /* Target the new flex container */
+    display: flex; /* Active le mode Flexbox */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    gap: 2rem; /* Crée un espace de 2rem entre le texte et l'image */
+    margin-top: 1.5rem; /* Space below the h3 */
+}
+
+#accueil .accueil-subtitle {
+    text-align: center;
+    color: #004a99;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    margin-top: 0;
+}
+
+/* Le bloc de texte prendra toute la place disponible */
+.accueil-texte {
+    flex: 1; /* Propriété magique qui dit "prends l'espace restant" */
+}
+
+/* On stylise la photo de profil */
+.accueil-photo {
+    max-width: 280px; /* On agrandit la photo */
+    width: 100%;
+    height: auto; /* La hauteur s'ajuste pour ne pas déformer l'image */
+    border-radius: 15px; /* Coins arrondis pour un look moderne, mais pas un cercle */
+    object-fit: cover; /* S'assure que l'image remplit l'espace sans être déformée */
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.25)); /* Ombre portée plus subtile */
+}
+
+/* On transforme le lien "Découvrir mon parcours" en un bouton attractif */
+.accueil-texte a {
+    display: inline-block; /* Permet d'appliquer padding et autres styles de bloc */
+    background-color: #0056b3;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    position: relative; /* Nécessaire pour l'effet de brillance */
+    overflow: hidden; /* Cache le pseudo-élément qui dépasse */
+}
+
+/* EFFET DE BRILLANCE (SHINE) */
+.accueil-texte a::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: rotate(45deg) translateX(-150%);
+    transition: transform 0.5s ease;
+}
+
+.accueil-texte a:hover {
+    text-decoration: none; /* On ne veut pas de soulignement sur ce bouton */
+    background-color: #003d82; /* On fonce le bleu au survol */
+    transform: translateY(-2px); /* Le bouton se soulève légèrement */
+}
+
+.accueil-texte a:hover::after {
+    transform: rotate(45deg) translateX(150%); /* On fait passer la brillance */
+}
+
+
+/* --- Formulaire de Contact --- */
+
+/* On cible les div qui entourent chaque champ du formulaire */
+#contact form div {
+    margin-bottom: 1rem; /* Espace entre chaque champ du formulaire */
+}
+
+#contact label {
+    display: block; /* Met le label sur sa propre ligne, au-dessus du champ */
+    margin-bottom: 5px; /* Petit espace entre le label et le champ */
+    font-weight: bold; /* Met le texte du label en gras */
+}
+
+/* Style commun pour les champs de texte et la zone de message */
+#contact input[type="text"],
+#contact input[type="email"],
+#contact textarea {
+    width: 100%; /* Les champs prennent toute la largeur disponible */
+    padding: 10px;
+    border: 1px solid #ccc; /* Bordure grise sobre */
+    border-radius: 5px;
+    box-sizing: border-box; /* Important pour que le padding n'augmente pas la largeur totale */
+}
+
+/* Style visuel quand on clique dans un champ (focus) */
+#contact input:focus,
+#contact textarea:focus {
+    outline: none; /* Enlève le contour par défaut, souvent moche */
+    border-color: #0056b3; /* La bordure devient bleue */
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Ajoute une lueur bleue */
+}
+
+#contact button {
+    background-color: #0056b3; /* Fond bleu, cohérent avec le thème */
+    color: white; /* Texte blanc */
+    padding: 12px 20px;
+    border: none; /* Pas de bordure disgracieuse */
+    border-radius: 5px;
+    cursor: pointer; /* Le curseur se transforme en main pour montrer que c'est cliquable */
+    font-size: 1rem;
+    transition: background-color 0.2s; /* Petite animation au survol */
+}
+
+/* Le bouton devient un peu plus foncé quand on passe la souris dessus */
+#contact button:hover {
+    background-color: #003d82;
+}
+
+/* --- 2. Micro-interactions sur les articles (Expériences, Projets, etc.) --- */
+main article {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+    background-color: rgba(255, 255, 255, 0.5); /* Fond blanc semi-transparent pour les cartes */
+}
+
+main article:hover {
+    transform: perspective(1000px) rotateY(5deg) scale(1.03); /* EFFET 3D ! */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* L'ombre devient plus prononcée */
+}
+
+/* --- Animation d'apparition au défilement --- */
+main section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+main section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* La première section (accueil) est toujours visible par défaut */
+main section#accueil {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Responsive Design (pour les écrans plus petits) --- */
+
+@media (max-width: 768px) {
+    /* Ces styles s'appliquent UNIQUEMENT sur les écrans de 768px ou moins (tablettes et mobiles) */
+
+    /* 1. On adapte l'en-tête et le contenu principal pour les petits écrans */
+    header {
+        padding: 1.5rem 1rem;
+    }
+    main {
+        margin: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    /* 2. Page d'accueil : on empile le texte et la photo */
+    #accueil .accueil-content-flex {
+        flex-direction: column; /* Les éléments s'empilent verticalement */
+    }
+    #accueil .accueil-texte { text-align: center; } /* Center text when stacked */
+
+    /* 3. On affiche le bouton hamburger */
+    .hamburger-icon {
+        display: block;
+        position: absolute; /* Pour le placer librement dans le header */
+        top: 2.5rem;
+        right: 1.5rem;
+        font-size: 1.5rem;
+        color: white;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 1000; /* Pour qu'il soit toujours au-dessus des autres éléments */
+    }
+
+    /* 4. On cache le menu de navigation par défaut sur mobile */
+    #nav-menu {
+        position: fixed; /* Le menu se superpose au contenu */
+        top: 0;
+        right: -100%; /* On le sort de l'écran par la droite */
+        width: 70%;
+        height: 100%;
+        background: rgba(0, 40, 80, 0.9);
+        backdrop-filter: blur(10px);
+        transition: right 0.3s ease-in-out; /* Animation de glissement */
+    }
+
+    /* 5. Quand le menu est actif, on le fait apparaître */
+    #nav-menu.active {
+        right: 0; /* On le ramène à l'écran */
+    }
+}
+
+/* --- Définition de l'animation de clignotement --- */
+@keyframes slow-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* --- Définition de l'animation de l'aura lumineuse --- */
+@keyframes glowing-border {
+    0% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 86, 179, 0.2); }
+    50% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 40px rgba(0, 86, 179, 0.6); }
+    100% { box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15), 0 0 20px rgba(0, 86, 179, 0.2); }
+}
